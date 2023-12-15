@@ -9,22 +9,43 @@ body {
     font-family: Geneva, Arial, Helvetica, san-serif;
 }
 dl {
-    width: 100%;
-    height: 100%;
-    padding: 50px;
+    padding: 30px;
     background: #FFF;
     border-radius: 20px;
 }
+dt {
+    margin: 10px;
+    padding: 10px;
+    background: #333;
+    color: #FFF;
+}
+dd {
+    margin: 20px;
+    padding: 0;
+    max-width: 90%;
+    font-size: 9px;
+    word-break: break-all;
+}
 </style>
+<script>
+window.onload = function () {
+    var $vmlink = 'vmess://' + btoa('{"v": "2", "ps": "HOST", "add": "HOST", "port": "443", "id": "UUID", "aid": "0", "scy": "auto", "net": "ws", "type": "none", "host": "", "path": "VMESS_WSPATH", "tls": "tls", "sni": "", "alpn": ""}');
+    var $vllink = 'vless://UUID@HOST:443?encryption=none&security=tls&type=ws&path=' + escape('VLESS_WSPATH') + '#HOST'
+    document.getElementById("vm1").innerHTML = $vmlink;
+    document.getElementById("vm2").innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?data=' + escape($vmlink) + '">';
+    document.getElementById("vl1").innerHTML = $vllink;
+    document.getElementById("vl2").innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?data=' + escape($vllink) + '">';
+}
+</script>
 </head>
 <body>
 <dl>
     <dt>VMESS 协议</dt>
-    <dd>链接：VMESS_LINK</dd>
-    <dd><img src="https://api.qrserver.com/v1/create-qr-code/?data=VMESS_LINK"></dd>
+    <dd id="vm1"></dd>
+    <dd id="vm2"></dd>
     <dt>VLESS 协议</dt>
-    <dd>链接：VLESS_LINK</dd>
-    <dd><img src="https://api.qrserver.com/v1/create-qr-code/?data=VLESS_LINK"></dd>    
+    <dd id="vl1"></dd>
+    <dd id="vl2"></dd>
 </dl>
 </body>
 </html>

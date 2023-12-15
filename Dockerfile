@@ -3,10 +3,10 @@ USER root
 
 EXPOSE 80
 
-ENV HOST test.com
-ENV UUID de04add9-1234-abcd-950c-08cd5320df18
-ENV VMESS_WSPATH /vmess
-ENV VLESS_WSPATH /vless
+ENV HOST ''
+ENV UUID ''
+ENV VMESS_WSPATH /vm
+ENV VLESS_WSPATH /vl
 
 RUN mkdir /usr/local/v2ray /etc/v2ray
 
