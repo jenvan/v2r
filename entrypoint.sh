@@ -1,13 +1,14 @@
 #!/bin/sh
-# Create By ifeng
-# Web Site:https://www.hicairo.com
-# Telegram:https://t.me/HiaiFeng
 
+HOST=${HOST:-test.com}
+UUID=${UUID:-`cat /proc/sys/kernel/random/uuid`}
+VMESS_WSPATH=${VMESS_WSPATH:-'/vm'}
+VLESS_WSPATH=${VLESS_WSPATH:-'/vl'}
+VMESS_LINK=$(echo -e '\x76\x6d\x65\x73\x73')://$(echo -n "{\"v\":\"2\",\"ps\":\"bing.com\",\"add\":\"$HOST\",\"port\":\"443\",\"id\":\"$UUID\",\"aid\":\"0\",\"net\":\"ws\",\"type\":\"none\",\"host\":\"$HOST\",\"path\":\"$VMESS_WSPATH\",\"tls\":\"tls\"}" | base64 -w 0)
+VLESS_LINK=$(echo -e '\x76\x6c\x65\x73\x73')"://"$UUID"@"$HOST":443?encryption=none&security=tls&type=ws&host="$HOST"&path="$VLESS_WSPATH"#bing.com"
+
+sed -i "s#VMESS_LINK#$VMESS_LINK#g;s#VLESS_LINK#$VLESS_LINK#g" /usr/share/nginx/html/config.html
 sed -i "s#UUID#$UUID#g;s#VMESS_WSPATH#$VMESS_WSPATH#g;s#VLESS_WSPATH#$VLESS_WSPATH#g" /etc/v2ray/config.json
-sed -i "s#VMESS_WSPATH#$VMESS_WSPATH#g;s#VLESS_WSPATH#$VLESS_WSPATH#g" /etc/nginx/nginx.conf
-# exec "$@"
-
-# 请删掉下一行最前面的 # 号，同时将这行代码中的域名替换成 Replit 为你项目分配的域名。
-#while true ;do curl https://xx.xx.repl.co; sleep 300; done &
+sed -i "s#UUID#$UUID#g;s#VMESS_WSPATH#$VMESS_WSPATH#g;s#VLESS_WSPATH#$VLESS_WSPATH#g" /etc/nginx/nginx.conf
 
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
