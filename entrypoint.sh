@@ -11,4 +11,5 @@ sed -i "s#VMESS_LINK#$VMESS_LINK#g;s#VLESS_LINK#$VLESS_LINK#g" /usr/share/nginx/
 sed -i "s#UUID#$UUID#g;s#VMESS_WSPATH#$VMESS_WSPATH#g;s#VLESS_WSPATH#$VLESS_WSPATH#g" /etc/v2ray/config.json
 sed -i "s#UUID#$UUID#g;s#VMESS_WSPATH#$VMESS_WSPATH#g;s#VLESS_WSPATH#$VLESS_WSPATH#g" /etc/nginx/nginx.conf
 
-/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+nginx
+/usr/local/v2ray/v2ray run -config=/etc/v2ray/config.json
